@@ -1,0 +1,44 @@
+@import 'bootstrap/dist/css/bootstrap.min.css';
+
+:root {
+    --color-primary: #176344;
+    --color-primary-dark: #104a32;
+    --color-accent: #a76a14;
+    --color-text: #25332c;
+    --color-muted: #5d6d63;
+    --color-background: #f5f7f5;
+    --color-border: #d9e1dc;
+    --bs-body-color: var(--color-text);
+    --bs-body-bg: var(--color-background);
+    --bs-border-color: var(--color-border);
+    --bs-link-color: var(--color-primary);
+    --bs-link-color-rgb: 23, 99, 68;
+    --bs-link-hover-color-rgb: 16, 74, 50;
+    --bs-link-hover-color: var(--color-primary-dark);
+    --bs-body-font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+body { min-width: 320px; }
+a, button, input { scroll-margin-top: 1rem; }
+:focus-visible { outline: 3px solid var(--color-primary); outline-offset: 3px; }
+.navbar-brand { color: var(--color-primary); font-weight: 600; }
+.text-muted { color: var(--color-muted) !important; }
+.btn-primary {
+    --bs-btn-bg: var(--color-primary);
+    --bs-btn-border-color: var(--color-primary);
+    --bs-btn-hover-bg: var(--color-primary-dark);
+    --bs-btn-hover-border-color: var(--color-primary-dark);
+    --bs-btn-active-bg: var(--color-primary-dark);
+    --bs-btn-active-border-color: var(--color-primary-dark);
+    --bs-btn-focus-shadow-rgb: 23, 99, 68;
+}
+.form-control:focus { border-color: var(--color-primary); box-shadow: 0 0 0 .2rem rgb(23 99 68 / 15%); }
+.login-panel { width: 100%; max-width: 28rem; }
+.admin-sidebar { --bs-offcanvas-width: 16rem; }
+.admin-sidebar .nav-link { color: var(--color-text); }
+.admin-sidebar .nav-link.active { color: #fff; background: var(--color-primary); }
+.admin-main { min-width: 0; }
+@media (min-width: 992px) {
+    .admin-sidebar { width: 16rem; flex-shrink: 0; min-height: calc(100vh - 4.5rem); }
+}
+
