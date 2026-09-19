@@ -39,7 +39,7 @@ class AuthController extends Controller
         RateLimiter::clear($key);
         $request->session()->regenerate();
 
-        return redirect()->route('admin.dashboard');
+        return redirect()->route('admin.dashboard')->with('success', 'Selamat datang. Anda berhasil masuk ke panel admin.');
     }
 
     public function logout(Request $request): RedirectResponse

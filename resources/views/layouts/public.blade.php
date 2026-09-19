@@ -8,8 +8,8 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @stack('styles')
 </head>
-<body class="d-flex flex-column min-vh-100">
-    <a class="visually-hidden-focusable p-3 bg-white" href="#main-content">Lewati ke konten utama</a>
+<body class="public-body d-flex flex-column min-vh-100">
+    <a class="visually-hidden-focusable skip-link" href="#main-content">Lewati ke konten utama</a>
     @include('partials.public.navbar')
     <main id="main-content" class="flex-grow-1" tabindex="-1">
         @yield('content')

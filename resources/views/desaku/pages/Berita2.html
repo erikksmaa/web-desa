@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desa Mandiri - Website Resmi</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2c5530;
+            --secondary-color: #4a7c59;
+            --accent-color: #f8b500;
+            --light-bg: #f8f9fa;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .navbar-brand img {
+            height: 50px;
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 100px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="rgba(255,255,255,0.1)"><polygon points="0,0 1000,0 1000,100 0,20"/></svg>');
+            background-size: cover;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .section-title {
+            color: var(--primary-color);
+            font-weight: bold;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            width: 50px;
+            height: 3px;
+            background: var(--accent-color);
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .info-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 100%;
+        }
+        
+        .info-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        
+        .info-card .icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 30px;
+            margin-bottom: 20px;
+        }
+        
+        .news-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            height: 100%;
+        }
+        
+        .news-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .news-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .service-item {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+        
+        .service-item:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+        
+        .service-item .icon {
+            font-size: 40px;
+            color: var(--accent-color);
+            margin-bottom: 15px;
+        }
+        
+        .service-item:hover .icon {
+            color: var(--accent-color);
+        }
+        
+        .stats-section {
+            background: var(--light-bg);
+            padding: 80px 0;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            display: block;
+        }
+        
+        .footer {
+            background: var(--primary-color);
+            color: white;
+            padding: 50px 0 20px;
+        }
+        
+        .footer h5 {
+            color: var(--accent-color);
+            margin-bottom: 20px;
+        }
+        
+        .footer a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer a:hover {
+            color: var(--accent-color);
+        }
+        
+        .btn-primary-custom {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border: none;
+            border-radius: 25px;
+            padding: 12px 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        @media (max-width: 768px) {
+            .hero-section {
+                padding: 60px 0;
+            }
+            
+            .hero-section h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%232c5530'/><text x='50' y='60' text-anchor='middle' fill='white' font-size='20' font-weight='bold'>DESA</text></svg>" alt="Logo Desa" class="me-2">
+                <span class="fw-bold text-success">Desa Mandiri</span>
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link fw-semibold" href="#beranda">Beranda</a>
+                    </li>
+                   
+                    <li class="nav-item">
+                        <a class="nav-link fw-semibold" href="#berita">Berita</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link fw-semibold" href="#berita">Berita</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link fw-semibold" href="#layanan">Layanan</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link fw-semibold" href="#kontak">Kontak</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="beranda" class="hero-section">
+        <div class="container hero-content">
+            <div class="row align-items-center">
+                <div class="col-lg-8">
+                    <h1 class="display-4 fw-bold mb-4">Selamat Datang di Website Resmi Desa Mandiri</h1>
+                    <p class="lead mb-4">Desa yang maju, mandiri, dan sejahtera untuk seluruh warganya. Kami berkomitmen memberikan pelayanan terbaik dan transparansi dalam pemerintahan desa.</p>
+                    <div class="d-flex flex-wrap gap-3">
+                        <a href="#layanan" class="btn btn-primary-custom btn-lg">
+                            <i class="fas fa-hand-holding-heart me-2"></i>Layanan Desa
+                        </a>
+                        <a href="#berita" class="btn btn-outline-light btn-lg">
+                            <i class="fas fa-newspaper me-2"></i>Berita Terkini
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4 text-center">
+                    <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 200'><rect width='300' height='200' fill='rgba(255,255,255,0.1)' rx='15'/><circle cx='150' cy='80' r='30' fill='%23f8b500'/><rect x='100' y='120' width='100' height='60' fill='%23ffffff' rx='5'/><text x='150' y='140' text-anchor='middle' fill='%232c5530' font-size='12'>Kantor Desa</text></svg>" alt="Kantor Desa" class="img-fluid">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Info Cards Section -->
+    <section class="py-5" style="margin-top: -50px; position: relative; z-index: 3;">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="info-card text-center">
+                        <div class="icon mx-auto">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h4>Penduduk</h4>
+                        <h2 class="text-primary">5,234</h2>
+                        <p class="text-muted">Jiwa</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="info-card text-center">
+                        <div class="icon mx-auto">
+                            <i class="fas fa-home"></i>
+                        </div>
+                        <h4>Kepala Keluarga</h4>
+                        <h2 class="text-primary">1,456</h2>
+                        <p class="text-muted">KK</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="info-card text-center">
+                        <div class="icon mx-auto">
+                            <i class="fas fa-map-marked-alt"></i>
+                        </div>
+                        <h4>Luas Wilayah</h4>
+                        <h2 class="text-primary">12.5</h2>
+                        <p class="text-muted">Km²</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'><rect width='400' height='300' fill='%23e9ecef' rx='10'/><circle cx='200' cy='120' r='50' fill='%232c5530'/><rect x='150' y='180' width='100' height='80' fill='%234a7c59' rx='5'/><text x='200' y='140' text-anchor='middle' fill='white' font-size='16'>Kantor</text><text x='200' y='155' text-anchor='middle' fill='white' font-size='16'>Desa</text></svg>" alt="Tentang Desa" class="img-fluid rounded">
+                </div>
+                <div class="col-lg-6">
+                    <h2 class="section-title">Tentang Desa Mandiri</h2>
+                    <p class="lead">Desa Mandiri merupakan desa yang terletak di kawasan strategis dengan potensi alam yang melimpah dan masyarakat yang gotong royong.</p>
+                    <p>Dengan visi menjadi desa yang maju, mandiri, dan sejahtera, kami terus berupaya meningkatkan kualitas hidup masyarakat melalui berbagai program pembangunan dan pemberdayaan.</p>
+                    
+                    <div class="row mt-4">
+                        <div class="col-6">
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="fas fa-check-circle text-success me-3"></i>
+                                <span>Pemerintahan Transparan</span>
+                            </div>
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="fas fa-check-circle text-success me-3"></i>
+                                <span>Pelayanan Prima</span>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="fas fa-check-circle text-success me-3"></i>
+                                <span>Pembangunan Berkelanjutan</span>
+                            </div>
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="fas fa-check-circle text-success me-3"></i>
+                                <span>Masyarakat Sejahtera</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- News Section -->
+    <section id="berita" class="py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">Berita & Pengumuman</h2>
+                <p class="lead">Informasi terkini dari Desa Mandiri</p>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="news-card">
+                        <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 200'><rect width='400' height='200' fill='%234a7c59'/><circle cx='200' cy='100' r='30' fill='white' opacity='0.8'/><text x='200' y='180' text-anchor='middle' fill='white' font-size='14'>Kegiatan Desa</text></svg>" alt="Berita 1">
+                        <div class="p-4">
+                            <span class="badge bg-primary mb-2">Pengumuman</span>
+                            <h5>Pembukaan Program Bantuan UMKM</h5>
+                            <p class="text-muted small">25 Juli 2025</p>
+                            <p>Desa Mandiri membuka program bantuan untuk pelaku UMKM dengan total dana 500 juta rupiah...</p>
+                            <a href="#" class="btn btn-outline-primary btn-sm">Baca Selengkapnya</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="news-card">
+                        <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 200'><rect width='400' height='200' fill='%232c5530'/><rect x='150' y='80' width='100' height='40' fill='white' opacity='0.8'/><text x='200' y='180' text-anchor='middle' fill='white' font-size='14'>Infrastruktur</text></svg>" alt="Berita 2">
+                        <div class="p-4">
+                            <span class="badge bg-success mb-2">Pembangunan</span>
+                            <h5>Pembangunan Jalan Desa Tahap II</h5>
+                            <p class="text-muted small">22 Juli 2025</p>
+                            <p>Proyek pembangunan jalan desa sepanjang 2 kilometer memasuki tahap kedua dengan progress 60%...</p>
+                            <a href="#" class="btn btn-outline-primary btn-sm">Baca Selengkapnya</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="news-card">
+                        <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 200'><rect width='400' height='200' fill='%23f8b500'/><polygon points='200,60 220,100 180,100' fill='white' opacity='0.8'/><text x='200' y='180' text-anchor='middle' fill='white' font-size='14'>Prestasi</text></svg>" alt="Berita 3">
+                        <div class="p-4">
+                            <span class="badge bg-warning mb-2">Prestasi</span>
+                            <h5>Juara Desa Terbaik Tingkat Kabupaten</h5>
+                            <p class="text-muted small">20 Juli 2025</p>
+                            <p>Desa Mandiri berhasil meraih penghargaan sebagai desa terbaik dalam kategori inovasi pelayanan...</p>
+                            <a href="#" class="btn btn-outline-primary btn-sm">Baca Selengkapnya</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="layanan" class="py-5 bg-light">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">Layanan Desa</h2>
+                <p class="lead">Kemudahan pelayanan untuk warga desa</p>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-lg-3 col-md-6">
+                    <div class="service-item">
+                        <div class="icon">
+                            <i class="fas fa-id-card"></i>
+                        </div>
+                        <h5>Surat Keterangan</h5>
+                        <p>Pembuatan berbagai surat keterangan untuk keperluan administrasi</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <div class="service-item">
+                        <div class="icon">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <h5>Legalisir Dokumen</h5>
+                        <p>Layanan legalisir dokumen penting dengan proses yang cepat</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <div class="service-item">
+                        <div class="icon">
+                            <i class="fas fa-hand-holding-usd"></i>
+                        </div>
+                        <h5>Bantuan Sosial</h5>
+                        <p>Informasi dan pendaftaran program bantuan sosial pemerintah</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <div class="service-item">
+                        <div class="icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h5>Data & Statistik</h5>
+                        <p>Akses data dan statistik desa untuk keperluan penelitian</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistics Section -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6">
+                    <div class="stat-item">
+                        <span class="stat-number">100%</span>
+                        <p>Rumah Teraliri Listrik</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="stat-item">
+                        <span class="stat-number">95%</span>
+                        <p>Akses Air Bersih</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="stat-item">
+                        <span class="stat-number">87%</span>
+                        <p>Jalan Beraspal</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="stat-item">
+                        <span class="stat-number">98%</span>
+                        <p>Cakupan Internet</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="kontak" class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <h5>Desa Mandiri</h5>
+                    <p>Desa yang maju, mandiri, dan sejahtera untuk seluruh warganya dengan komitmen pelayanan terbaik.</p>
+                    <div class="d-flex gap-3">
+                        <a href="#" class="fs-4"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="fs-4"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="fs-4"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="fs-4"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5>Menu</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#beranda">Beranda</a></li>
+                        <li><a href="#profil">Profil Desa</a></li>
+                        <li><a href="#berita">Berita</a></li>
+                        <li><a href="#layanan">Layanan</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h5>Layanan</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Surat Keterangan</a></li>
+                        <li><a href="#">Legalisir Dokumen</a></li>
+                        <li><a href="#">Bantuan Sosial</a></li>
+                        <li><a href="#">Data Statistik</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h5>Kontak</h5>
+                    <div class="d-flex align-items-center mb-2">
+                        <i class="fas fa-map-marker-alt me-3"></i>
+                        <span>Jl. Raya Desa No. 123, Kec. Mandiri</span>
+                    </div>
+                    <div class="d-flex align-items-center mb-2">
+                        <i class="fas fa-phone me-3"></i>
+                        <span>(021) 1234-5678</span>
+                    </div>
+                    <div class="d-flex align-items-center mb-2">
+                        <i class="fas fa-envelope me-3"></i>
+                        <span>info@desamandiri.id</span>
+                    </div>
+                </div>
+            </div>
+            
+            <hr class="my-4">
+            <div class="text-center">
+                <p>&copy; 2025 Desa Mandiri. Hak Cipta Dilindungi Undang-Undang.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add active class to navigation items on scroll
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Animate statistics on scroll
+        function animateStats() {
+            const stats = document.querySelectorAll('.stat-number');
+            stats.forEach(stat => {
+                const targetNumber = stat.textContent;
+                if (targetNumber.includes('%')) {
+                    const number = parseInt(targetNumber);
+                    animateNumber(stat, 0, number, '%');
+                }
+            });
+        }
+
+        function animateNumber(element, start, end, suffix = '') {
+            const duration = 2000;
+            const stepTime = Math.abs(Math.floor(duration / (end - start)));
+            let current = start;
+            const increment = end > start ? 1 : -1;
+            const timer = setInterval(() => {
+                current += increment;
+                element.textContent = current + suffix;
+                if (current === end) {
+                    clearInterval(timer);
+                }
+            }, stepTime);
+        }
+
+        // Trigger animation when stats section is visible
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateStats();
+                    observer.unobserve(entry.target);
+                }
+            });
+        });
+
+        const statsSection = document.querySelector('.stats-section');
+        if (statsSection) {
+            observer.observe(statsSection);
+        }
+    </script>
+</body>
+</html>

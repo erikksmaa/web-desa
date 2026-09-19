@@ -8,7 +8,7 @@
 @endphp
 
 <div class="mb-3">
-    <label class="form-label" for="{{ $id }}">{{ $label }}@if ($attributes->has('required')) <span class="required-indicator" aria-hidden="true">*</span><span class="visually-hidden"> wajib</span>@endif</label>
+    <label class="form-label" for="{{ $id }}">{{ $label }}@if ($attributes->get('required', false)) <span class="required-indicator" aria-hidden="true">*</span><span class="visually-hidden"> wajib</span>@endif</label>
     <input name="{{ $name }}" id="{{ $id }}" type="file"
            @class(['form-control', 'is-invalid' => $hasError])
            data-file-input

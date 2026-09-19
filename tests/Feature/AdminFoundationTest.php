@@ -42,7 +42,8 @@ class AdminFoundationTest extends TestCase
             ->assertSeeText('Belum ada agenda mendatang')
             ->assertSeeText('Belum ada berita')
             ->assertSeeText('Belum ada pengumuman')
-            ->assertSee('id="confirmation-modal"', false);
+            ->assertSee('data-admin-delete-form', false)
+            ->assertDontSee('id="confirmation-modal"', false);
     }
 
     public function test_dashboard_shows_counts_and_only_upcoming_published_agendas(): void
@@ -166,14 +167,30 @@ class AdminFoundationTest extends TestCase
         $this->assertStringContainsString('required-indicator', $html);
     }
 
-    public function test_confirmation_modal_uses_one_csrf_protected_delete_form(): void
+    public function test_layout_uses_one_csrf_protected_delete_form_for_sweetalert_confirmation(): void
     {
-        $html = Blade::render('<x-admin.confirmation-modal />');
+        $html = $this->actingAs(User::factory()->create())
+            ->get(route('admin.dashboard'))
+            ->assertOk()
+            ->getContent();
 
-        $this->assertSame(1, substr_count($html, 'data-confirm-form'));
+        $this->assertSame(1, substr_count($html, 'data-admin-delete-form'));
         $this->assertStringContainsString('name="_method" value="DELETE"', $html);
         $this->assertStringContainsString('name="_token"', $html);
-        $this->assertStringContainsString('aria-labelledby="confirmation-modal-title"', $html);
+        $this->assertStringNotContainsString('confirmation-modal', $html);
+    }
+
+    public function test_destructive_button_exposes_safe_data_for_central_confirmation_handler(): void
+    {
+        $html = Blade::render(
+            '<x-admin.confirm-button action="/admin/news/1" item="Berita contoh" />',
+        );
+
+        $this->assertStringContainsString('data-delete-action="/admin/news/1"', $html);
+        $this->assertStringContainsString('data-delete-item="Berita contoh"', $html);
+        $this->assertStringContainsString('data-delete-message=', $html);
+        $this->assertStringContainsString('aria-label="Hapus Berita contoh"', $html);
+        $this->assertStringNotContainsString('onclick=', $html);
     }
 
     public function test_bootstrap_five_is_the_default_pagination_view(): void

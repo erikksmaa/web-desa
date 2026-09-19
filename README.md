@@ -2,7 +2,7 @@
 
 A public Indonesian village information website with a lightweight administrator CMS.
 
-Phase 0 established the architecture in [PROJECT_CONTEXT.md](PROJECT_CONTEXT.md). Phase 1 initializes the foundation only: public placeholder, admin session authentication, dashboard and Bootstrap layouts. The original static prototype is still unavailable. No business CMS modules are implemented.
+Phase 0 established the architecture in [PROJECT_CONTEXT.md](PROJECT_CONTEXT.md). Phases 1–3 provide the Laravel foundation, database models, authentication, and shared admin system. Phases 4–8 provide News, Announcements, Agenda, Documents, and Gallery management plus their public pages. Phases 9–12 provide village settings, officials, banners, and the dynamic homepage. Phase 13 established accessibility, while Phases 14 and 14B delivered the prototype-driven public presentation. The supplied static reference is preserved at resources/views/desaku; it is not a production view directory.
 
 ## Requirements
 
@@ -37,7 +37,7 @@ php artisan serve --host=127.0.0.1 --port=8000
 
 Open http://127.0.0.1:8000 and http://127.0.0.1:8000/admin/login. For frontend development, run npm run dev in a separate terminal while the PHP server is running.
 
-Sessions use MySQL, cache uses files, and queues run synchronously. No queue worker is needed. Upload handling is deferred; public/storage has not been linked. Local automatic temporary-file routes are disabled until required by an authorized storage phase.
+Sessions use MySQL, cache uses files, and queues run synchronously. No queue worker is needed. News thumbnails use the public disk under storage/app/public/news/thumbnails. Run php artisan storage:link during setup; the local public/storage link is present. Local automatic temporary-file routes remain disabled.
 
 ## Development administrator
 
@@ -66,6 +66,14 @@ Git was initialized without a commit. A path-specific safe.directory entry was n
 
 Phase 2 adds the approved business schema, models, factories and local sample data without CRUD or public content pages. Run php artisan migrate followed by php artisan db:seed locally; seeders preserve existing values and administrator credentials. Documents/albums use draft placeholder file references, and demo banners are inactive. No physical sample files are generated. The complete SQLite suite now passes 67 tests (316 assertions). See PROJECT_CONTEXT.md for finalized relationships and deletion policies.
 
-Phase 3 adds the reusable admin shell, dashboard summaries, Blade components, Bootstrap pagination, centralized confirmation/file-preview JavaScript, and a separate admin CSS bundle. No routes, dependencies, schema, uploads, or CRUD modules were added.
+Phase 3 adds the reusable admin shell, dashboard summaries, Blade components, Bootstrap pagination, centralized confirmation/file-preview JavaScript, and a separate admin CSS bundle.
 
-Wait for external review before Phase 4. Do not run destructive database reset commands.
+Phase 4 adds authenticated News Category and News CRUD, safe thumbnail storage, publication rules, search/filter/pagination, and public News listing/detail pages. Content remains escaped plain text. The complete SQLite suite passes 84 tests (419 assertions).
+
+Wait for external review before starting Village Profile, Officials, Settings, Banners, or Homepage Integration. Do not run destructive database reset commands.
+
+## File storage prerequisites
+
+News thumbnails and Gallery images use the public disk and the existing public/storage link. Announcement attachments and Documents use storage/app/private on the local disk; keep that directory outside the web server document root and keep local automatic file serving disabled. The web server document root remains public.
+
+Ensure storage/app/private and storage/app/public are writable by PHP. Application limits are 10 MB per announcement attachment, 15 MB per document, and 5 MB per gallery image with at most 10 photos per request plus an optional cover. PHP/web-server request limits must accommodate the batch: upload_max_filesize at least 15M, post_max_size at least 64M, and max_file_uploads at least 11. The detected local PHP limits already exceed these requirements. No additional package or queue worker is needed.

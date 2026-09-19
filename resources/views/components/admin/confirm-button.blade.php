@@ -2,10 +2,9 @@
 
 <button type="button"
         {{ $attributes->class(['btn', 'btn-outline-danger', 'btn-sm']) }}
-        data-bs-toggle="modal"
-        data-bs-target="#confirmation-modal"
-        data-confirm-action="{{ $action }}"
-        data-confirm-item="{{ $item }}"
-        data-confirm-message="{{ $message }}">
+        aria-label="Hapus {{ $item }}"
+        data-delete-action="{{ $action }}"
+        data-delete-item="{{ $item }}"
+        data-delete-message="{{ $message }}">
     {{ $slot->isEmpty() ? 'Hapus' : $slot }}
 </button>

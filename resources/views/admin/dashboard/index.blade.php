@@ -14,6 +14,7 @@
             <div class="col-sm-6 col-xl-4">
                 <x-admin.stat-card
                     :label="$summary['label']"
+                    :url="$summary['url'] ?? null"
                     :total="$summary['total']"
                     :published="$summary['published']"
                     :draft="$summary['draft']"
@@ -26,7 +27,7 @@
 
     <div class="row g-4">
         <div class="col-xl-7">
-            <x-admin.card title="Agenda mendatang">
+            <x-admin.card title="Agenda mendatang"><x-slot:actions><a class="small" href="{{ route('admin.agendas.index') }}">Kelola</a></x-slot:actions>
                 @if ($upcomingAgendas->isEmpty())
                     <x-admin.empty-state
                         title="Belum ada agenda mendatang"
@@ -56,13 +57,13 @@
 
         <div class="col-xl-5">
             <x-admin.card title="Panduan singkat">
-                <p class="mb-2">Gunakan menu di samping untuk mengelola informasi desa setelah modul tersedia.</p>
+                <p class="mb-2">Gunakan menu di samping untuk mengelola informasi desa melalui modul yang tersedia.</p>
                 <p class="admin-helper-text mb-0">Data yang sudah dihapus sementara tidak disertakan dari ringkasan.</p>
             </x-admin.card>
         </div>
 
         <div class="col-lg-6">
-            <x-admin.card title="Berita terbaru">
+            <x-admin.card title="Berita terbaru"><x-slot:actions><a class="small" href="{{ route('admin.news.index') }}">Kelola</a></x-slot:actions>
                 @if ($latestNews->isEmpty())
                     <x-admin.empty-state title="Belum ada berita" message="Berita terbaru akan tampil di sini." />
                 @else
@@ -82,7 +83,7 @@
         </div>
 
         <div class="col-lg-6">
-            <x-admin.card title="Pengumuman terbaru">
+            <x-admin.card title="Pengumuman terbaru"><x-slot:actions><a class="small" href="{{ route('admin.announcements.index') }}">Kelola</a></x-slot:actions>
                 @if ($latestAnnouncements->isEmpty())
                     <x-admin.empty-state title="Belum ada pengumuman" message="Pengumuman terbaru akan tampil di sini." />
                 @else

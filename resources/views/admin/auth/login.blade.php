@@ -7,11 +7,15 @@
     <title>Masuk Admin — {{ config('app.name') }}</title>
     @vite(['resources/css/app.css', 'resources/css/admin.css', 'resources/js/app.js'])
 </head>
-<body class="admin-body d-flex align-items-center justify-content-center min-vh-100 p-3">
-    <main class="login-panel admin-card bg-white border rounded-3 p-4 p-sm-5">
-        <p class="small text-muted mb-2">{{ config('app.name') }}</p>
-        <h1 class="h3 mb-4">Masuk Admin</h1>
-        @include('partials.flash-messages')
+<body class="admin-body admin-login-body d-flex align-items-center justify-content-center min-vh-100 p-3">
+    <main class="login-panel admin-card bg-white p-4 p-sm-5">
+        <div class="admin-login-brand mb-4">
+            <span class="admin-brand-mark" aria-hidden="true"><x-admin.icon name="village" /></span>
+            <div><p class="fw-semibold mb-0">{{ config('app.name') }}</p><p class="admin-metadata mb-0">Panel administrasi</p></div>
+        </div>
+        <p class="admin-topbar-eyebrow mb-1">Selamat datang kembali</p>
+        <h1 class="h2 mb-2">Masuk Admin</h1>
+        <p class="text-muted mb-4">Gunakan akun administrator untuk mengelola informasi desa.</p>
         <x-admin.validation-summary />
         <form method="POST" action="{{ route('admin.login.store') }}" novalidate>
             @csrf
@@ -21,5 +25,6 @@
         </form>
         <a class="d-inline-block mt-4 small" href="{{ route('home') }}">Kembali ke beranda</a>
     </main>
+    @include('partials.admin.feedback')
 </body>
 </html>

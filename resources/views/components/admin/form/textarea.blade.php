@@ -8,7 +8,7 @@
 @endphp
 
 <div class="mb-3">
-    <label class="form-label" for="{{ $id }}">{{ $label }}@if ($attributes->has('required')) <span class="required-indicator" aria-hidden="true">*</span><span class="visually-hidden"> wajib</span>@endif</label>
+    <label class="form-label" for="{{ $id }}">{{ $label }}@if ($attributes->get('required', false)) <span class="required-indicator" aria-hidden="true">*</span><span class="visually-hidden"> wajib</span>@endif</label>
     <textarea name="{{ $name }}" id="{{ $id }}" rows="{{ $rows }}"
               @class(['form-control', 'is-invalid' => $hasError])
               @if ($hasError) aria-invalid="true" @endif

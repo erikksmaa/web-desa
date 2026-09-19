@@ -10,7 +10,7 @@
 <div class="mb-3">
     <label class="form-label" for="{{ $id }}">
         {{ $label }}
-        @if ($attributes->has('required'))<span class="required-indicator" aria-hidden="true">*</span><span class="visually-hidden"> wajib</span>@endif
+        @if ($attributes->get('required', false))<span class="required-indicator" aria-hidden="true">*</span><span class="visually-hidden"> wajib</span>@endif
     </label>
     <input name="{{ $name }}" id="{{ $id }}" type="{{ $type }}"
            value="{{ $type === 'password' ? '' : old($field, $value) }}"

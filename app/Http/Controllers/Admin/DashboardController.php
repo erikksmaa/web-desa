@@ -23,6 +23,7 @@ class DashboardController extends Controller
             $this->publishingSummary('Album Galeri', GalleryAlbum::class),
             [
                 'label' => 'Perangkat Desa',
+                'url' => route('admin.village-officials.index'),
                 'total' => VillageOfficial::count(),
                 'published' => VillageOfficial::active()->count(),
                 'draft' => VillageOfficial::where('is_active', false)->count(),

@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Support\Facades\Storage;
 
 class GalleryAlbum extends Model
 {
@@ -43,6 +45,22 @@ class GalleryAlbum extends Model
     public function photos(): HasMany
     {
         return $this->hasMany(GalleryPhoto::class);
+    }
+
+    public function firstPhoto(): HasOne
+    {
+        return $this->hasOne(GalleryPhoto::class)->ofMany(['sort_order' => 'min', 'id' => 'min']);
+    }
+
+    public function coverUrl(): ?string
+    {
+        foreach ([$this->cover_image, $this->firstPhoto?->image_path] as $path) {
+            if ($path && Storage::disk('public')->exists($path)) {
+                return Storage::disk('public')->url($path);
+            }
+        }
+
+        return null;
     }
 
     public function scopePublished(Builder $query): Builder
